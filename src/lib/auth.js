@@ -1,5 +1,6 @@
+/* eslint-disable linebreak-style */
 const { AuthenticationError } = require('apollo-server-express')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const config = require('../config')
 
@@ -34,15 +35,25 @@ const decodeToken = token => {
  * @returns {Promise.<string>}
  */
 const hashPassword = password => new Promise((resolve, reject) => {
-  bcrypt.hash(password, 10, (err, hash) => {
-    if (err) {
-      reject(err)
-    } else {
-      resolve(hash)
-    }
+  bcrypt.genSalt(10, (err1, salt) => {
+    bcrypt.hash(password, salt, (err2, hash) => {
+      if (err1) {
+        reject(err1)
+      } else if (err2) {
+        reject(err2)
+      } else {
+        resolve(hash)
+      }
+    })
   })
+  // bcrypt.hash(password, 10, (err, hash) => {
+  //   if (err) {
+  //     reject(err)
+  //   } else {
+  //     resolve(hash)
+  //   }
+  // })
 })
-
 
 /**
  *

@@ -16,6 +16,8 @@ exports.up = knex => knex.schema.createTable('authors', table => {
 
   table.integer('numBooksPublished').defaultTo(0)
 
+  table.string('password')
+
   table
     .uuid('addressId')
     .references('addresses.id')

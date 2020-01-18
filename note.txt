@@ -1,0 +1,2 @@
+   "bcrypt": "^3.0.7",
+   was in dependencies in package.json

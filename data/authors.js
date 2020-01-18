@@ -1,6 +1,8 @@
 const casual = require('casual')
 const addressesData = require('./addresses')
 
+const defaultPassword = '$2y$10$yUCqtZXWqL2At41jbhZ0EuXIysGveJYezJG.O2adftVXW6ABBmgoC'
+
 casual.define('author', addressId => ({
   id: casual.uuid,
   email: casual.email,
@@ -8,6 +10,7 @@ casual.define('author', addressId => ({
   lastName: casual.last_name,
   age: casual.integer(20, 100),
   numBooksPublished: casual.integer(1, 4),
+  password: defaultPassword,
   addressId,
 }))
 
